@@ -1,0 +1,37 @@
+{
+  "name": "syl-workers",
+  "version": "1.0.0",
+  "description": "A set of jobs for processing inputs.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint jobs index.js config.js scripts",
+    "postinstall": "node ./scripts/install-jobs.js",
+    "sensory-input-processor": "nodemon ./jobs/sensory-input-processor/worker.js --exec 'npm run lint && node'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harry671003/syl-workers.git"
+  },
+  "author": "Harry John <harry671003@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/harry671003/syl-workers/issues"
+  },
+  "homepage": "https://github.com/harry671003/syl-workers#readme",
+  "engines": {
+    "node": ">=8.9.3 <10.0.0"
+  },
+  "dependencies": {
+    "app-root-path": "^2.0.1",
+    "applicationinsights": "^1.0.1",
+    "azure-storage": "^2.7.0",
+    "fs-extra": "^5.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.16.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "nodemon": "^1.14.11"
+  }
+}
