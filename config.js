@@ -1,11 +1,13 @@
+const deepmerge = require('deepmerge');
+
 const settingsUndefined = () => {
   throw new Error('All required secrets are not defined');
 };
 
-module.exports = {
+const baseConfig = {
   connections: {
     sylInterface: {
-      url: 'http://url',
+      url: 'http://invalidurl',
       token: process.env.SYL_SEND_WEBHOOK_TOKEN || settingsUndefined(),
     },
   },
@@ -24,3 +26,34 @@ module.exports = {
     },
   },
 };
+
+const configExtensions = {
+  DEV: {
+    connections: {
+      sylInterface: {
+        url: `http://localhost:${process.env.SYL_PORT}`,
+      },
+    },
+  },
+  PROD: {
+    connections: {
+      sylInterface: {
+        url: 'https://sylphrena.azurewebsites.net',
+      },
+    },
+  },
+};
+
+const buildConfig = () => {
+  const environment = process.env.SYL_ENV || 'DEV';
+
+  const configExt = configExtensions[environment];
+
+  if (!configExt) {
+    throw new Error('Invalid environemnt');
+  }
+
+  return deepmerge(baseConfig, configExt);
+};
+
+module.exports = buildConfig();
