@@ -23,8 +23,10 @@
     "node": ">=8.9.3 <10.0.0"
   },
   "dependencies": {
+    "ajv": "^5.5.2",
     "app-root-path": "^2.0.1",
     "applicationinsights": "^1.0.1",
+    "axios": "^0.17.1",
     "azure-storage": "^2.7.0",
     "deepmerge": "^2.0.1",
     "fs-extra": "^5.0.0"
