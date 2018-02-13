@@ -22,7 +22,7 @@ const baseConfig = {
   },
   jobs: {
     sensoryInputProcessor: {
-      pollingInterval: 5000,
+      pollingInterval: 2000,
     },
   },
 };

@@ -1,4 +1,7 @@
 const azureStorage = require('azure-storage');
+const bluebird = require('bluebird');
+
+bluebird.promisifyAll(azureStorage.QueueService.prototype);
 
 function Queue(connectionString, queueName) {
   // Queue Interface.
@@ -6,32 +9,25 @@ function Queue(connectionString, queueName) {
   this.queueName = queueName;
 }
 
-Queue.prototype.initialize = function init(cb) {
-  this.queueSvc.createQueueIfNotExists(
+Queue.prototype.initialize = async function init() {
+  await this.queueSvc.createQueueIfNotExistsAsync(this.queueName);
+};
+
+Queue.prototype.getMessages = async function getMessages() {
+  return this.queueSvc.getMessagesAsync(
     this.queueName,
-    cb,
+    {
+      numOfMessages: 10,
+    },
   );
 };
 
-Queue.prototype.listen = function listen(messageProcessor, timeout) {
-  setInterval(() => {
-    console.log('[+] looking for messages..');
-    this.queueSvc.getMessages(this.queueName, (err, messages) => {
-      for (let i = 0; i < messages.length; i += 1) {
-        const msg = messages[i];
-        messageProcessor.processMessage(err, msg, () => {
-          if (!err) {
-            this.queueSvc.deleteMessage(
-              this.queueName,
-              msg.messageId,
-              msg.popReceipt,
-              () => {},
-            );
-          }
-        });
-      }
-    });
-  }, timeout);
+Queue.prototype.deleteMessage = async function deleteMessage(message) {
+  return this.queueSvc.deleteMessageAsync(
+    this.queueName,
+    message.messageId,
+    message.popReceipt,
+  );
 };
 
 module.exports = Queue;
