@@ -20,6 +20,9 @@ const baseConfig = {
       name: 'sensory-inputs',
     },
   },
+  wit: {
+    token: process.env.SYL_WIT_TOKEN || settingsUndefined(),
+  },
   jobs: {
     sensoryInputProcessor: {
       pollingInterval: 2000,
