@@ -20,6 +20,19 @@ const baseConfig = {
       name: 'sensory-inputs',
     },
   },
+  memory: {
+    conn: {
+      url: process.env.SYL_MEMORY_CONN_URL || settingsUndefined(),
+      auth: {
+        user: process.env.SYL_MEMORY_CONN_USER || settingsUndefined(),
+        password: process.env.SYL_MEMORY_CONN_PWORD || settingsUndefined(),
+      },
+    },
+    db: 'main-memory',
+    collections: {
+      people: 'people', // People who have interacted with Syl.
+    },
+  },
   wit: {
     token: process.env.SYL_WIT_TOKEN || settingsUndefined(),
   },
