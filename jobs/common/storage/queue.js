@@ -7,6 +7,7 @@ function Queue(connectionString, queueName) {
   // Queue Interface.
   this.queueSvc = azureStorage.createQueueService(connectionString);
   this.queueName = queueName;
+  this.poisonQueueName = `${queueName}-poison`;
 }
 
 Queue.prototype.initialize = async function init() {
@@ -19,6 +20,15 @@ Queue.prototype.getMessages = async function getMessages() {
     {
       numOfMessages: 10,
     },
+  );
+};
+
+Queue.prototype.moveToPoison = async function poison(message) {
+  await this.deleteMessage(message);
+
+  await this.queueSvc.createMessageAsync(
+    this.poisonQueueName,
+    message.messageText,
   );
 };
 

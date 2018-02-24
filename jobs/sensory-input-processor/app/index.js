@@ -14,8 +14,16 @@ const listenToQueue = async (queue, processor) => {
   console.info(`[+] Found ${messages.length} messages.`);
 
   bluebird.map(messages, async (m) => {
-    await processor.processMessage(m);
-    await queue.deleteMessage(m);
+    if (m.dequeueCount > 5) {
+      // The dequeue count has exceeded the threshold.
+      // eslint-disable-next-line no-console
+      console.log('[-] moving message to poison queue');
+      await queue.moveToPoison(m);
+    } else {
+      // Process the message.
+      await processor.processMessage(m);
+      await queue.deleteMessage(m);
+    }
   });
 };
 
