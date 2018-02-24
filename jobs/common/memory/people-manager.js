@@ -18,15 +18,11 @@ PeopleManager.prototype.addNewPerson = async function addNewPerson(person) {
 };
 
 PeopleManager.prototype.getPersonById = async function getPersonById(personId) {
-  const personsMatched = await this.db(this.collection).find({
-    personId,
-  });
-
-  if (personsMatched.length === 0) {
-    return null;
-  }
-
-  return personsMatched[0];
+  return this.db
+    .collection(this.collection)
+    .findOne({
+      personId,
+    });
 };
 
 module.exports = PeopleManager;

@@ -7,7 +7,10 @@ const execute = async (intent) => {
     return action(intent);
   }
 
-  return 'Sorry, I didn\'t understand.';
+  return {
+    type: 'text',
+    value: 'Sorry, I didn\'t understand.',
+  };
 };
 
 module.exports = {
