@@ -24,6 +24,7 @@ function installJob(job) {
     fse.removeSync(installLocation);
   }
 
+  // eslint-disable-next-line no-console
   console.log('[+] installing job at: ', installLocation);
 
   fse.copySync(job.path, installLocation);
