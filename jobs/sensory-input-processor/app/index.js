@@ -9,7 +9,10 @@ const SylConnector = baseRequire('/jobs/common/services/syl-connector');
 
 const listenToQueue = async (queue, processor) => {
   const messages = await queue.getMessages();
+
+  // eslint-disable-next-line no-console
   console.info(`[+] Found ${messages.length} messages.`);
+
   bluebird.map(messages, async (m) => {
     await processor.processMessage(m);
     await queue.deleteMessage(m);

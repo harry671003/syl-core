@@ -19,10 +19,10 @@ PeopleManager.prototype.addNewPerson = async function addNewPerson(person) {
 
 PeopleManager.prototype.getPersonById = async function getPersonById(personId) {
   const personsMatched = await this.db(this.collection).find({
-    personId
+    personId,
   });
 
-  if (personsMatched.length == 0) {
+  if (personsMatched.length === 0) {
     return null;
   }
 

@@ -1,3 +1,4 @@
+/* eslint-disable */
 const appRootPath = require('app-root-path');
 
 global.baseRequire = appRootPath.require;
