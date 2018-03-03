@@ -4,7 +4,7 @@ Syl or Sylphrena is a context oriented bot who can learn skills. Inspired from a
 
 
 <p align="center">
-  <img src="./assets/syl-icon.png?v=0.1.0" alt="Size Limit example"
+  <img src="./docs/assets/syl-icon.png?v=0.1.0" alt="Size Limit example"
        width="200" height="200">
   <!-- bot by Rflor from the Noun Project -->
 </p>
