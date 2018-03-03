@@ -5,7 +5,7 @@ tagline: A bot who can do stuff for you.
 description: A bot who can do stuff for you.
 ---
 
-# What is Syl?
+## What is Syl?
 
 <p align='center'>
   <img src='assets/syl-icon.png'/> 
