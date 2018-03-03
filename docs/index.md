@@ -1,11 +1,11 @@
 ---
 layout: default
-title: S.Y.L
+title: Syl
 tagline: A bot who can do stuff for you.
 description: A bot who can do stuff for you.
 ---
 
-# S.Y.L Documentation
+# What is Syl?
 
 <p align='center'>
   <img src='assets/syl-icon.png'/> 
